@@ -1,38 +1,205 @@
-.App {
-  text-align: center;
+*{
+  font-family: 'Poppins', sans-serif;
+   animation: transitionIn 0.9s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes transitionIn{
+  from{
+    opacity: 0;
+    transform: translate(-10px);
+  }
+  to{
+    opacity: 1;
+    transform: translate(0);
   }
 }
+ body{
+    background-image: url(https://wallpapercave.com/wp/wp8002958.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#logo{
+  position: fixed;
+  left:50px;
+  color: blue;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: default;
+  display: inline-block;
+  padding: 2px 30px;
+  font-weight: bold;
+  font-size: 150%;
+}
+#logo span{
+  color: black;;
+}
+.navbar {
+  background-color: rgba(222, 219, 219, 0.078) !important;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: flex-end;
+  padding: 0.5rem ;
+  backdrop-filter:blur(2px);
+  border-bottom: 4px solid rgba(120, 120, 120, .2);
+}
+.navbar a {
+  /* display: inline-block; */
+  padding: 10px 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 120%;
+  left: -100%;
+  width: 8%;
+}
+.navbar a:hover {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App {
+  text-align: center;
+  margin: .5rem;
+
+}
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+  padding-top: -20%;
+  font-size: 2rem;
+  color: #333;
+}
+.container{
+  flex-direction: column;
+  border-radius: 100px;
+  padding: 10px; 
+  /* box-shadow:  0 -3px 15px rgb(10, 175, 230), 
+  0 3px 10px rgb(242, 242, 243); */
+  border: none;
+  margin: 0 20%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+label{
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+
+}
+
+input{
+ padding: 10px;
+  width: 225px;
+  border: none; 
+  margin-bottom: 2px;
+  border-radius: 100px;
+  margin-right: 10px;
+  border-top: 10px;
+  transition: border 0.3s, box-shadow 0.3s, opacity 0.3s;
+  box-shadow: inset  0 -3px 15px rgb(124, 203, 230), 
+ inset 0 3px 10px rgb(124, 203, 230);
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+select{
+  padding: 3px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 17.5px;
+  margin-bottom: 10px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 10px;
+  
+}
+th, td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+th {
+  width: auto;
+  background-color: #f2f2f2;
+}
+h3,h2{
+  margin-top: 21px;
+}
+
+button{
+  background-color: #0077FF;
+  margin-left: 5px;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+button:hover {
+  background-color: grey;
+  transform: scale(1.05); 
+}
+
+@media (min-width:360px) {
+
+  .container{
+    flex-direction: column;
+    border-radius: 100px;
+    
+    /* box-shadow:  0 -3px 15px rgb(10, 175, 230), 
+    0 3px 10px rgb(242, 242, 243); */
+    border: none;
+    margin: 0 0%;
   }
-  to {
-    transform: rotate(360deg);
+  #logo{
+    position: fixed;
+
+    color: blue;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: default;
+  
+    font-weight: bold;
+    font-size: 150%;
   }
+ 
+  #logo span{
+    color: black;;
+  }
+  .navbar {
+    background-color: rgba(222, 219, 219, 0.078) !important;
+    display: flex;
+    justify-content: flex-end;
+   
+    backdrop-filter:blur(2px);
+    border-bottom: 4px solid rgba(120, 120, 120, .2);
+  }
+  .navbar a {
+    /* display: inline-block; */
+    padding: 0px 0px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 120%;
+    left: -100%;
+    width: 8%;
+  }
+  .navbar a:hover {
+    color: white;
+  }
+  
+  .App {
+    text-align: center;
+    margin: .5rem;
+  
+  }
+  
 }
