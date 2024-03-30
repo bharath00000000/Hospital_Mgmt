@@ -6,20 +6,21 @@ import PatientPage from './PatientPage';
 // import Home from './Home';
 import './App.css';
 import AllPatientsTable from './AllPatientsTable';
+import Navbar from "./Navbar";
 
 
 function Home() {
-  return <div><h2>Home Page</h2>
+  return <div><h2>Home </h2>
 
 <AllPatientsTable />
-  </div>;
+</div>
 }
 
 function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container">
           <header id="logo">Trust<span>Cure+</span></header>
             <div className="collapse navbar-collapse">
@@ -36,8 +37,10 @@ function App() {
               </ul>
             </div>
           </div>
-        </nav>
+        </nav> */}
 
+
+<Navbar/>
    
 
         <Routes>

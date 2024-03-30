@@ -11,10 +11,11 @@ const AllPatientsTable = () => {
     fetchPatients();
     fetchDoctors();
   }, []);
-
+//"proxy": "http://localhost:8080/",
   const fetchPatients = () => {
-    axios.get('/patients')
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/patients`)
       .then(response => {
+        console.log(response.data)
         setPatients(response.data);
         setFilteredPatients(response.data);
       })
@@ -22,7 +23,7 @@ const AllPatientsTable = () => {
   };
 
   const fetchDoctors = () => {
-    axios.get('/doctors')
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/doctors`)
       .then(response => {
         setDoctors(response.data);
       })
@@ -34,6 +35,7 @@ const AllPatientsTable = () => {
     setSelectedDoctor(selectedDoctorId);
     if (selectedDoctorId === '') {
       setFilteredPatients(patients);
+      
     } else {
       const filtered = patients.filter(patient => patient.doctor && patient.doctor.id === parseInt(selectedDoctorId));
       setFilteredPatients(filtered);
@@ -42,14 +44,17 @@ const AllPatientsTable = () => {
 
   return (
     <div>
-      <h3>All Patients</h3>
-      <label htmlFor="doctor">Filter by Doctor:</label>
+      {/* <h3>Home </h3> */}
+      <label htmlFor="doctor">Select a Doctor:</label>
       <select id="doctor" onChange={handleDoctorChange} value={selectedDoctor}>
         <option value="">All Doctors</option>
-        {doctors.map(doctor => (
+        {Array.isArray(doctors) && doctors?.map(doctor => (
           <option key={doctor.id} value={doctor.id}>{doctor.name}</option>
         ))}
       </select>
+      {filteredPatients.length === 0 ? (
+        <p>No patients have been assigned to this doctor.</p>
+      ) : (
       <table>
         <thead>
           <tr>
@@ -62,7 +67,7 @@ const AllPatientsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredPatients.map(patient => (
+          {Array.isArray(filteredPatients) && filteredPatients?.map(patient => (
             <tr key={patient.id}>
               <td>{patient.name}</td>
               <td>{patient.weight}</td>
@@ -74,6 +79,7 @@ const AllPatientsTable = () => {
           ))}
         </tbody>
       </table>
+       )}
     </div>
   );
 };

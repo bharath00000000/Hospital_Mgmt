@@ -21,7 +21,7 @@ const PatientPage = () => {
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false); // State to store the ID of the selected patient
 
     const fetchPatients = () => {
-        axios.get('/patients')
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/patients`)
             .then(response => {
                 console.log('patient fetch', response.data);
                 setPatients(response.data);
@@ -30,7 +30,7 @@ const PatientPage = () => {
     };
 
     const fetchDoctors = () => {
-        axios.get('/doctors')
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/doctors`)
             .then(response => {
                 setDoctors(response.data);
                 console.log("doctor fetch", response.data);
@@ -47,10 +47,10 @@ const PatientPage = () => {
     const handleAddPatient = (e) => {
         e.preventDefault();
 
-        console.log('Before doctor_id', newPatient.doctor);
-        console.log('newPatient', newPatient);
+        // console.log('Before doctor_id', newPatient.doctor);
+        // console.log('newPatient', newPatient);
 
-        axios.post('/patients', {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/patients`, {
             name: newPatient.name,
             weight: newPatient.weight,
             gender: newPatient.gender,
@@ -59,8 +59,8 @@ const PatientPage = () => {
             doctor: newPatient.doctor
         })
             .then(response => {
-                console.log('after adding the post doctor_id', newPatient);
-                console.log('Patient added:', response.data);
+                // console.log('after adding the post doctor_id', newPatient);
+                // console.log('Patient added:', response.data);
                 fetchPatients();
                 console.log('after Patient added:', response.data);
                 setNewPatient({
@@ -69,7 +69,9 @@ const PatientPage = () => {
                     gender: '',
                     age: '',
                     disease: '',
-                    doctor: ''
+                    doctor: {
+                        id: 0
+                    }
                 });
             })
             .catch(error => console.error('Error adding patient:', error));
@@ -99,7 +101,7 @@ const PatientPage = () => {
         // Implement delete logic using patientId
         console.log('Deleting patient with ID:', patientId);
         // After deletion, refresh the list of patients
-        axios.delete(`/patients/${patientId}`)
+        axios.delete(`${process.env.REACT_APP_BACKEND_URL}/patients/${patientId}`)
             .then(response => {
                 console.log('Patient deleted:', response.data);
                 // Refresh the list of patients
@@ -118,7 +120,7 @@ const PatientPage = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        axios.put(`/patients/${selectedPatient.id}`, selectedPatient)
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/patients/${selectedPatient.id}`, selectedPatient)
             .then(response => {
                 fetchPatients();
                 setIsUpdateModalOpen(false);
@@ -134,27 +136,27 @@ const PatientPage = () => {
 
     return (
         <div>
-            <h2>Patients Page</h2>
+            <h2>Patient </h2>
             <form onSubmit={handleAddPatient}>
                 <div>
                     {/* <h3>Add New Patient:</h3> */}
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">Enter Name:</label>
                     <input type="text" name="name" value={newPatient.name} onChange={handleChange} /> <br /><br />
 
-                    <label htmlFor="weight">Weight:</label>
+                    <label htmlFor="weight">Enter Weight:</label>
                     <input type="number" name="weight" value={newPatient.weight} onChange={handleChange} /> <br /><br />
 
-                    <label htmlFor="gender">Gender:</label>
+                    <label htmlFor="gender">Enter Gender:</label>
                     <input type="text" name="gender" value={newPatient.gender} onChange={handleChange} /> <br /><br />
 
-                    <label htmlFor="age">Age:</label>
+                    <label htmlFor="age">Enter Age:</label>
                     <input type="number" name="age" value={newPatient.age} onChange={handleChange} /> <br /><br />
 
-                    <label htmlFor="disease">Disease:</label>
+                    <label htmlFor="disease">Enter Disease:</label>
                     <input type="text" name="disease" value={newPatient.disease} onChange={handleChange} /> <br /><br />
 
 
-                    <label htmlFor="doctor_id">Assign Doctor:</label>
+                    <label htmlFor="doctor_id">Select Doctor:</label>
                     <select
                         id="doctor"
                         name="doctor.id" // Set name attribute to "doctor.id"
@@ -162,13 +164,13 @@ const PatientPage = () => {
                         onChange={handleChange} // Use handleChange to handle changes
                     >
                         <option value="">Select Doctor</option>
-                        {doctors.map(doctor => (
+                        {Array.isArray(doctors) && doctors?.map(doctor => (
                             <option key={doctor.id} value={doctor.id}>
                                 {doctor.name} - {doctor.specialization}
                             </option>
                         ))}
                     </select><br />
-                    <button type="submit">Add Patient</button>
+                    <button type="submit">Create</button>
                 </div>
             </form>
             <div>
@@ -186,37 +188,37 @@ const PatientPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {patients.map(patient => (
+                        {Array.isArray(patients) && patients?.map(patient => (
                             <tr key={patient.id}>
-                            <td>{patient.id === (selectedPatient && selectedPatient.id) ?
-                                <input type="text" name="name" value={selectedPatient.name} onChange={handleUpdateChange} />
-                                : patient.name}</td>
-                            <td>{patient.id === (selectedPatient && selectedPatient.id) ?
-                                <input type="number" name="weight" value={selectedPatient.weight} onChange={handleUpdateChange} />
-                                : patient.weight}</td>
-                            <td>{patient.id === (selectedPatient && selectedPatient.id) ?
-                                <input type="text" name="gender" value={selectedPatient.gender} onChange={handleUpdateChange} />
-                                : patient.gender}</td>
-                            <td>{patient.id === (selectedPatient && selectedPatient.id) ?
-                                <input type="number" name="age" value={selectedPatient.age} onChange={handleUpdateChange} />
-                                : patient.age}</td>
-                            <td>{patient.id === (selectedPatient && selectedPatient.id) ?
-                                <input type="text" name="disease" value={selectedPatient.disease} onChange={handleUpdateChange} />
-                                : patient.disease}</td>
-                            <td>{patient.doctor ? patient.doctor.name : 'Not Assigned'}</td>
-                            <td>
-                                {patient.id === (selectedPatient && selectedPatient.id) ?
-                                    <React.Fragment>
-                                        <button onClick={handleUpdate}>Save</button>
-                                        <button onClick={handleCloseUpdateModal}>Cancel</button>
-                                    </React.Fragment>
-                                    :
-                                    <button onClick={() => handleUpdatePatient(patient.id)}>Update</button>}
+                                <td>{patient.id === (selectedPatient && selectedPatient.id) ?
+                                    <input type="text" name="name" value={selectedPatient.name} onChange={handleUpdateChange} />
+                                    : patient.name}</td>
+                                <td>{patient.id === (selectedPatient && selectedPatient.id) ?
+                                    <input type="number" name="weight" value={selectedPatient.weight} onChange={handleUpdateChange} />
+                                    : patient.weight}</td>
+                                <td>{patient.id === (selectedPatient && selectedPatient.id) ?
+                                    <input type="text" name="gender" value={selectedPatient.gender} onChange={handleUpdateChange} />
+                                    : patient.gender}</td>
+                                <td>{patient.id === (selectedPatient && selectedPatient.id) ?
+                                    <input type="number" name="age" value={selectedPatient.age} onChange={handleUpdateChange} />
+                                    : patient.age}</td>
+                                <td>{patient.id === (selectedPatient && selectedPatient.id) ?
+                                    <input type="text" name="disease" value={selectedPatient.disease} onChange={handleUpdateChange} />
+                                    : patient.disease}</td>
+                                <td>{patient.doctor ? patient.doctor.name : 'Not Assigned'}</td>
+                                <td>
+                                    {patient.id === (selectedPatient && selectedPatient.id) ?
+                                        <React.Fragment>
+                                            <button onClick={handleUpdate}>Save</button>
+                                            <button onClick={handleCloseUpdateModal}>Cancel</button>
+                                        </React.Fragment>
+                                        :
+                                        <button onClick={() => handleUpdatePatient(patient.id)}>Update</button>}
 
-                                {!(selectedPatient && selectedPatient.id) &&
-                                    <button onClick={() => handleDeletePatient(patient.id)}>Delete</button>}
-                            </td>
-                        </tr>
+                                    {!(selectedPatient && selectedPatient.id) &&
+                                        <button onClick={() => handleDeletePatient(patient.id)}>Delete</button>}
+                                </td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>
@@ -229,11 +231,3 @@ const PatientPage = () => {
 };
 
 export default PatientPage;
-
-
-
-
-
-
-
-

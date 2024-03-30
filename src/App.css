@@ -1,67 +1,70 @@
 *{
-  font-family: 'Poppins', sans-serif;
-   animation: transitionIn 0.9s;
+  font-family:'poppins','sans-serif';
+  animation: transitionIn 0.9s;
 }
-
 @keyframes transitionIn{
   from{
     opacity: 0;
-    transform: translate(-10px);
+    transform: translate(-10);
   }
   to{
     opacity: 1;
     transform: translate(0);
   }
 }
- body{
-    background-image: url(https://wallpapercave.com/wp/wp8002958.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+body{
+  background-image: url(https://wallpapercave.com/wp/wp8002958.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 
+}
 #logo{
   position: fixed;
-  left:50px;
+  left: 50px;
   color: blue;
   text-decoration: none;
   font-weight: 600;
   cursor: default;
   display: inline-block;
-  padding: 2px 30px;
+  padding: 10px 20px;
   font-weight: bold;
   font-size: 150%;
 }
 #logo span{
-  color: black;;
+  color: black;
+
 }
-.navbar {
+.navbar{
+  /* background-color: rgba(222, 219, 219, 0.078);
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 0.5rem 1rem; 
+  backdrop-filter: blur(2px);
+  border-bottom: 4px solid rgba(222, 219, 219, 0.078); */
   background-color: rgba(222, 219, 219, 0.078) !important;
   display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem ;
+  justify-content: space-between;
+  padding: 0.5rem 1rem ;
   backdrop-filter:blur(2px);
   border-bottom: 4px solid rgba(120, 120, 120, .2);
+  max-width: 100%;
 }
-.navbar a {
-  /* display: inline-block; */
-  padding: 10px 20px;
+.navbar a{
   text-decoration: none;
   color: black;
   font-weight: bold;
   font-size: 120%;
-  left: -100%;
-  width: 8%;
 }
-.navbar a:hover {
+
+.navbar a:hover{
   color: white;
 }
-
-.App {
+.App{
   text-align: center;
-  margin: .5rem;
-
+  margin: 2rem;
 }
-h1 {
+h1{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,69 +72,59 @@ h1 {
   padding-top: -20%;
   font-size: 2rem;
   color: #333;
+  
 }
 .container{
   flex-direction: column;
   border-radius: 100px;
-  padding: 10px; 
-  /* box-shadow:  0 -3px 15px rgb(10, 175, 230), 
-  0 3px 10px rgb(242, 242, 243); */
+  padding: 25px;
+  box-shadow:0 -3px 15px rgb(10,175,230) 0 3px 10px rgb(242,242,243);
   border: none;
-  margin: 0 20%;
-}
+  margin: 0 30%;
 
+}
 label{
   font-weight: bold;
   display: flex;
   justify-content: center;
-
-}
-
-input{
- padding: 10px;
-  width: 225px;
-  border: none; 
-  margin-bottom: 2px;
-  border-radius: 100px;
-  margin-right: 10px;
-  border-top: 10px;
-  transition: border 0.3s, box-shadow 0.3s, opacity 0.3s;
-  box-shadow: inset  0 -3px 15px rgb(124, 203, 230), 
- inset 0 3px 10px rgb(124, 203, 230);
-}
-
-label {
   font-weight: bold;
   color: #333;
-  margin-bottom: 2px;
+  margin-bottom: 8px;
+
 }
+input{
+  padding: 10px;
+  width: 200px;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 100px;
+  margin-right: 10px;
+  border-top: 30px;
+  transition: border 0.3s,box-shadow 0.3s,opacity 0.3s;
+  box-shadow: inset 0 -3px 15px rgb(124,203,230),inset 0 3px 10px rgb(124,203,230);
+}
+
 
 select{
   padding: 3px;
   border: 2px solid #ccc;
   border-radius: 5px;
-  font-size: 17.5px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
-table {
+table{
   width: 100%;
   border-collapse: collapse;
-  padding: 10px;
-  
+
 }
-th, td {
-  border: 1px solid #dddddd;
+th,td{
+  border: 2px solid #dddd;
   text-align: center;
   padding: 8px;
 }
-th {
-  width: auto;
+th{
   background-color: #f2f2f2;
 }
-h3,h2{
-  margin-top: 21px;
-}
-
 button{
   background-color: #0077FF;
   margin-left: 5px;
@@ -141,65 +134,28 @@ button{
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease ,transform 0.2s ease;
 }
-button:hover {
-  background-color: grey;
-  transform: scale(1.05); 
+button:hover{
+  background-color: gray;
+  transform: scale(1.05);
+  /* width: 150%;
+  aspect-ratio:; */
 }
-
-@media (min-width:360px) {
-
-  .container{
-    flex-direction: column;
-    border-radius: 100px;
-    
-    /* box-shadow:  0 -3px 15px rgb(10, 175, 230), 
-    0 3px 10px rgb(242, 242, 243); */
-    border: none;
-    margin: 0 0%;
+/*  */
+@media (max-width: 768px) {
+  #logo {
+    left: 10px;
   }
-  #logo{
-    position: fixed;
 
-    color: blue;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: default;
-  
-    font-weight: bold;
-    font-size: 150%;
-  }
- 
-  #logo span{
-    color: black;;
-  }
   .navbar {
-    background-color: rgba(222, 219, 219, 0.078) !important;
-    display: flex;
-    justify-content: flex-end;
-   
-    backdrop-filter:blur(2px);
-    border-bottom: 4px solid rgba(120, 120, 120, .2);
+    padding: 0.5rem; /* Adjust padding */
   }
+
   .navbar a {
-    /* display: inline-block; */
-    padding: 0px 0px;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    font-size: 120%;
-    left: -100%;
-    width: 8%;
+    display: block; /* Change to block to make items stack vertically */
+    padding: 10px 0; /* Adjust padding */
+    width: 100%; /* Set width to full */
+    text-align: center; /* Center text */
   }
-  .navbar a:hover {
-    color: white;
-  }
-  
-  .App {
-    text-align: center;
-    margin: .5rem;
-  
-  }
-  
 }
